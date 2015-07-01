@@ -1,12 +1,18 @@
 var ipInfo = require("../index.js")
 var should = require("chai").should();
+
+// chai.should;
 describe("test ips", function() {
-  it("should return true", function(done) {
+  it("should have country key", function(done) {
     ipInfo("8.8.8.8")
-      .then(function(d) {
-        console.log(d);
-        d.should.be.an.object;
-        done()
+      .then(function(data) {
+        try {
+          console.log(data);
+          data.should.contain.keys("country");
+          done()
+        } catch (err) {
+          done(err)
+        }
       }, done)
   });
-})
+});
